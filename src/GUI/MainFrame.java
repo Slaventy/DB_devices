@@ -16,16 +16,16 @@ public class MainFrame extends JFrame {
         jMenuBar.add(exit);
         this.setJMenuBar(jMenuBar);
 
-        Scrollbar scrollbar = new Scrollbar();
-        this.add(scrollbar);
-
         PanelFrame panelFrame = new PanelFrame();
-        setPanelField(panelFrame);
+        JScrollPane jScrollPane = new JScrollPane(panelFrame);
+        jScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        add(jScrollPane);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-    public void setPanelField(JPanel panel){
-        this.add(panel);
-    }
+//    public void setPanelField(JPanel panel){
+//        this.add(panel);
+//    }
 }
