@@ -8,18 +8,18 @@ import java.io.Serializable;
  * */
 
 public class Note implements Serializable {
-    private int cupboard;   // номер шкафа
+    private String cupboard;   // номер шкафа
     private String device_code; // шифр прибора
     private String device_name; //Наименование прибора
-    private int box_number;     //номер ящика
+    private String box_number;     //номер ящика
     private String leading_designer_of_the_device; //ведущий конструктор прибора
     private String annotation;  //примечание
 
-    public int getCupboard() {
+    public String getCupboard() {
         return cupboard;
     }
 
-    public void setCupboard(int cupboard) {
+    public void setCupboard(String cupboard) {
         this.cupboard = cupboard;
     }
 
@@ -39,11 +39,11 @@ public class Note implements Serializable {
         this.device_name = device_name;
     }
 
-    public int getBox_number() {
+    public String getBox_number() {
         return box_number;
     }
 
-    public void setBox_number(int box_number) {
+    public void setBox_number(String box_number) {
         this.box_number = box_number;
     }
 
@@ -62,4 +62,16 @@ public class Note implements Serializable {
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
     }
+
+    public String[] getNotes(){
+        return new String[]{
+         cupboard,
+        device_code,
+        device_name,
+        box_number,
+        leading_designer_of_the_device,
+        annotation
+        };
+    }
+
 }

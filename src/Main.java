@@ -1,7 +1,6 @@
-import GUI.MainFrame;
-
+import Interface.Logic;
 public class Main {
     public static void main(String[] args) {
-        new MainFrame();
+        new Logic();
     }
 }

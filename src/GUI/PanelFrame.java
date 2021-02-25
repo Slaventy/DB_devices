@@ -1,28 +1,36 @@
 package GUI;
 
+import Interface.DB;
+import Interface.Note;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class PanelFrame extends JPanel {
 
-    public PanelFrame(){
+    public PanelFrame(DB db){
+        int row = db.getDB().size();
+        int col = db.getTitles().length;
 
 
-        String[] text = {"\tШкаф", "\tШифр прибора", "\tНаименование прибора",
-                "\tНомер ящика", "\tВедущий конструктор", "\tПримечание"};
-        int row = 30, col = 6;
-        setLayout(new GridLayout(row, col));
+
+        setLayout(new GridLayout(row+1, col));
         JTextPane jTextPane;
-        for (int i = 0; i < row*col; i++){
-            if (i<=5){
-                jTextPane = new JTextPane();
-                jTextPane.setText(text[i]);
-                add(jTextPane);
-            }else {
-                jTextPane = new JTextPane();
-                jTextPane.setText(String.valueOf(i));
-                add(jTextPane);
-            }
+        for (int j = -1; j < row; j++) {
+           if (j == -1) {
+               for (int i = 0; i < col; i++) {
+                   jTextPane = new JTextPane();
+                   jTextPane.setText(db.getTitles()[i]);
+                   add(jTextPane);
+               }
+           }else {
+               Note note = db.getDB().get(j);
+               for (int i = 0; i < col; i++) {
+                   jTextPane = new JTextPane();
+                   jTextPane.setText(note.getNotes()[i]);
+                   add(jTextPane);
+               }
+           }
         }
     }
 }
