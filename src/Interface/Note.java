@@ -15,6 +15,8 @@ public class Note implements Serializable {
     private String leading_designer_of_the_device; //ведущий конструктор прибора
     private String annotation;  //примечание
 
+
+
     public String getCupboard() {
         return cupboard;
     }

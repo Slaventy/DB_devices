@@ -1,19 +1,39 @@
 package Interface;
 
 
-import GUI.MainFrame;
-import GUI.PanelFrame;
+import GUI.*;
 
 public class Logic {
-    public Logic(){
 
-        DB db = new DB();
+    private static Logic instance;
+    private final DB db = new DB();
+    PanelFrame panelFrame = new PanelFrame(db);
+    MainFrame mainFrame = new MainFrame(panelFrame);
+
+    private Logic(){
         Note note = new Note();
-        note.setBox_number("\t1");
-        note.setDevice_code("\t1A2");
+        note.setBox_number("1");
+        note.setDevice_code("1A2");
         db.addNoteInDB(note);
+    }
 
-        PanelFrame panelFrame = new PanelFrame(db);
-        MainFrame mainFrame = new MainFrame(panelFrame);
+    public static Logic getInstance(){
+        if (instance == null){
+            instance = new Logic();
+        }
+        return instance;
+    }
+
+    public void saveFile(){
+        SaveFrame saveFrame = new SaveFrame(db);
+    }
+
+    public void openFile(){
+        OpenFrame openFrame = new OpenFrame();
+        mainFrame.setPanel(openFrame.getPanelFrame());
+    }
+
+    public void addNote(){
+        AddNoteFrame addNoteFrame = new AddNoteFrame();
     }
 }

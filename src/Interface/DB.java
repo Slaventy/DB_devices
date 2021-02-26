@@ -7,20 +7,24 @@ import java.util.ArrayList;
  * БД с записями Note
  * */
 public class DB implements Serializable {
-    private final String[] titles = {"\tШкаф", "\tШифр прибора", "\tНаименование прибора",
-            "\tНомер ящика", "\tВедущий конструктор", "\tПримечание"};    //заголовок
-
     private final ArrayList<Note> db;  //база записей
 
     public DB(){
+        //создаем список состоящий из записей
         db = new ArrayList<>();
+        //в качестве первой записи введем заголовок
+        Note noteTitle = new Note();
+        noteTitle.setCupboard("Шкаф");
+        noteTitle.setDevice_code("Шифр\nприбора"); // шифр прибора
+        noteTitle.setDevice_name("Наименование\nприбора"); //Наименование прибора
+        noteTitle.setBox_number("Номер\nящика");     //номер ящика
+        noteTitle.setLeading_designer_of_the_device("Ведущий\nконструктор"); //ведущий конструктор прибора
+        noteTitle.setAnnotation("Примечание");  //примечание
+        db.add(noteTitle);
     }
 
-    public String[] getTitles(){
-        return titles;
-    }
 
-    //получить список
+    //получить список с заголовком
     public ArrayList<Note> getDB(){
         return db;
     }
