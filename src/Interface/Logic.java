@@ -6,15 +6,15 @@ import GUI.*;
 public class Logic {
 
     private static Logic instance;
-    private final DB db = new DB();
+    private DB db = new DB();
     PanelFrame panelFrame = new PanelFrame(db);
     MainFrame mainFrame = new MainFrame(panelFrame);
 
     private Logic(){
-        Note note = new Note();
-        note.setBox_number("1");
-        note.setDevice_code("1A2");
-        db.addNoteInDB(note);
+//        Note note = new Note();
+//        note.setBox_number("1");
+//        note.setDevice_code("1A2");
+//        db.addNoteInDB(note);
     }
 
     public static Logic getInstance(){
@@ -34,6 +34,9 @@ public class Logic {
     }
 
     public void addNote(){
-        AddNoteFrame addNoteFrame = new AddNoteFrame();
+        AddNoteFrame addNoteFrame = new AddNoteFrame(db.getDB().get(0));
+        db.addNoteInDB(addNoteFrame.getNewNote());
+        saveFile();
+
     }
 }

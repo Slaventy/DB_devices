@@ -4,6 +4,7 @@ import Interface.DB;
 import Interface.Note;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 public class PanelFrame extends JPanel {
@@ -24,6 +25,7 @@ public class PanelFrame extends JPanel {
                for (int i = 0; i < col; i++) {
                    jTextPane = new JTextPane();
                    jTextPane.setText(note.getNotes()[i]);
+                   jTextPane.setEditable(false);
                    add(jTextPane);
                }
         }
