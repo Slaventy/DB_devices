@@ -1,6 +1,5 @@
 package GUI;
 
-import Interface.DB;
 import Interface.Logic;
 import Interface.Note;
 
@@ -8,7 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddNoteFrame extends JFrame {
-    private Note note;
+    private final Note note;
+    private final Note newNote = new Note();
+
     public AddNoteFrame(Note exNote){
         note = exNote;
         setTitle("Добавление новой записи в базу");
@@ -52,12 +53,17 @@ public class AddNoteFrame extends JFrame {
 
 
         jMenuSave.addActionListener(e -> {
-            note.setCupboard(cupboardField.getText());
-            note.setDevice_code(device_code.getText());
-            note.setDevice_name(device_name.getName());
-            note.setBox_number(box_number.getText());
-            note.setLeading_designer_of_the_device(leading_designer_of_the_device.getText());
-            note.setAnnotation(annotation.getText());
+            newNote.setCupboard(cupboardField.getText());
+            newNote.setDevice_code(device_code.getText());
+            newNote.setDevice_name(device_name.getText());
+            newNote.setBox_number(box_number.getText());
+            newNote.setLeading_designer_of_the_device(leading_designer_of_the_device.getText());
+            newNote.setAnnotation(annotation.getText());
+            Logic.getInstance().saveFile(newNote);
+            for (String s :
+                    newNote.getNotes()) {
+                System.out.println(s);
+            }
         });
 
 
@@ -66,9 +72,6 @@ public class AddNoteFrame extends JFrame {
     }
 
     public Note getNewNote(){
-        return note;
+        return newNote;
     }
-
-
-
 }

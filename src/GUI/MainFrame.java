@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
+    private JScrollPane jScrollPane;
     public MainFrame(JPanel panel){
         //начальные настройки окна
         setTitle("База карточек приборов");
@@ -18,11 +19,8 @@ public class MainFrame extends JFrame {
         JMenu exit = new JMenu("Exit");
         JMenuItem open = new JMenuItem("Open");
         open.addActionListener(e -> Logic.getInstance().openFile());
-        JMenuItem save = new JMenuItem("save");
-        save.addActionListener(e -> Logic.getInstance().saveFile());
         JMenuItem addNote = new JMenuItem("addNote");
-        addNote.addActionListener(e -> Logic.getInstance().addNote());
-        file.add(save);
+
         file.add(open);
         file.add(addNote);
 
@@ -31,7 +29,7 @@ public class MainFrame extends JFrame {
         this.setJMenuBar(jMenuBar);
 
         //дополнение панели скролами
-        JScrollPane jScrollPane = new JScrollPane(panel);
+        jScrollPane = new JScrollPane(panel);
         jScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(jScrollPane);
@@ -39,13 +37,14 @@ public class MainFrame extends JFrame {
         //условия выхода и отображения
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        addNote.addActionListener(e -> Logic.getInstance().addNote());
     }
 
     //метод установки новой панели
     public void setPanel(PanelFrame panelFrame){
-        getContentPane().removeAll();
-        add(panelFrame);
-        getContentPane().repaint();
+        this.getContentPane().removeAll();
+        jScrollPane = new JScrollPane(panelFrame);
+        add(jScrollPane);
     }
 
 }
