@@ -29,6 +29,11 @@ public class DB implements Serializable {
         return db;
     }
 
+    //получить заголовок
+    public Note getTitle(){
+        return db.get(0);
+    }
+
     //добавить запись
     public void addNoteInDB(Note note){
         db.add(note);

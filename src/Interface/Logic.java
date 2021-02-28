@@ -9,8 +9,8 @@ public class Logic {
 
     private static Logic instance;
     private DB db = new DB();
-    PanelFrame panelFrame = new PanelFrame(db);
-    MainFrame mainFrame = new MainFrame(panelFrame);
+    private final PanelFrame panelFrame = new PanelFrame(db);
+    private final MainFrame mainFrame = new MainFrame(panelFrame);
 
     private Logic(){
     }
@@ -22,19 +22,7 @@ public class Logic {
         return instance;
     }
 
-    public void saveFile(){
-        try {
-            OutputStream outputStream = new FileOutputStream("base.obj");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(db);
-            outputStream.flush();
-            objectOutputStream.close();
-            outputStream.close();
-
-        }catch  (Exception exception){
-            exception.printStackTrace();
-        }
-    }
+    //добавляет новую запись к DB и сохраняет в файл
     public void saveFile(Note note){
         try {
             OutputStream outputStream = new FileOutputStream("base.obj");
@@ -66,6 +54,6 @@ public class Logic {
     }
 
     public void addNote(){
-        new AddNoteFrame(db.getDB().get(0));
+        new AddNoteFrame(db.getTitle());
     }
 }

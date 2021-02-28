@@ -16,16 +16,17 @@ public class MainFrame extends JFrame {
         //формирование менюБара
         JMenuBar jMenuBar = new JMenuBar();
         JMenu file = new JMenu("File");
-        JMenu exit = new JMenu("Exit");
+        JMenuItem exit = new JMenuItem("Exit");
+        exit.addActionListener( e -> {System.exit(0);});
         JMenuItem open = new JMenuItem("Open");
         open.addActionListener(e -> Logic.getInstance().openFile());
         JMenuItem addNote = new JMenuItem("addNote");
 
         file.add(open);
         file.add(addNote);
+        file.add(exit);
 
         jMenuBar.add(file);
-        jMenuBar.add(exit);
         this.setJMenuBar(jMenuBar);
 
         //дополнение панели скролами

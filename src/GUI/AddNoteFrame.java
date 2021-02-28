@@ -7,11 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddNoteFrame extends JFrame {
-    private final Note note;
     private final Note newNote = new Note();
 
-    public AddNoteFrame(Note exNote){
-        note = exNote;
+    public AddNoteFrame(Note dbTitle){
         setTitle("Добавление новой записи в базу");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         setBounds(10, 10, size.width/2, size.height/5);
@@ -35,10 +33,12 @@ public class AddNoteFrame extends JFrame {
         JTextField annotation = new JTextField();
 
         setLayout(new GridLayout(2, 6));
+
+        //формируем заголовок
         JTextField jTextField;
-        for (int i = 0; i < note.getNotes().length; i++){
+        for (int i = 0; i < dbTitle.getNotes().length; i++){
                 jTextField = new JTextField();
-                jTextField.setText(note.getNotes()[i]);
+                jTextField.setText(dbTitle.getNotes()[i]);
                 jTextField.setEditable(false);
                 add(jTextField);
         }
@@ -54,16 +54,14 @@ public class AddNoteFrame extends JFrame {
 
         jMenuSave.addActionListener(e -> {
             newNote.setCupboard(cupboardField.getText());
+            cupboardField.removeAll();
             newNote.setDevice_code(device_code.getText());
             newNote.setDevice_name(device_name.getText());
             newNote.setBox_number(box_number.getText());
             newNote.setLeading_designer_of_the_device(leading_designer_of_the_device.getText());
             newNote.setAnnotation(annotation.getText());
             Logic.getInstance().saveFile(newNote);
-            for (String s :
-                    newNote.getNotes()) {
-                System.out.println(s);
-            }
+            setVisible(true);
         });
 
 
